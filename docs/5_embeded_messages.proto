@@ -1,0 +1,33 @@
+syntax="proto3";
+
+// proto2, and proto3 allows embedded message types for complex data structures.
+
+message Playstation {
+  Joystick joystick = 1;
+  CPU cpu = 2;
+  Storage storage = 3;
+  Color color = 4;
+}
+
+message Joystick {
+  string color = 1;
+  int32 number_buttons = 2;
+  bool has_dual_sensor = 3;
+}
+
+message CPU {
+  int32 cores = 1;
+  float speed = 2; 
+}
+
+message Storage {
+  float size=1;
+  bool is_solid=2;
+}
+
+enum Color {
+  COLOR_UNSPECIFIED=0;
+  COLOR_RED=1;
+  COLOR_WHITE=2;
+  COLOR_BLACK=3;
+}

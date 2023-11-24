@@ -1,0 +1,60 @@
+syntax="proto3";
+// The first line specifies the version of the protocol buffers to use, this case is protocol buffers in version 3.
+// The protocol buffers compiler forces that the first line should not be empty or commented, when a version is not
+// specified the compiler assumes that the .proto file is using version 2 proto2.
+
+// protocol buffers has a concept of message which is your definition of data structures with its fields.
+// This fields supports scalar types corresponding to the automatically generated classes in the chosen programming language.
+// Check for supported scalar types https://protobuf.dev/programming-guides/proto3/#scalar.
+
+// Message's name must be unique.
+// Every field of a message type must have a label (this is optional), a scalar type, name, and field number.
+// NOTES:
+// 1. A field label represents wether the field is optional, repeated, or map of key/value pairs.
+// 2. Fields of the message can be scalar types, composite of mutiple messages or types, or enums.
+// 3. Fields name cannot be repeated and must be following snake_case syntax.
+// 4. Assigning a field number must be unique among all fields of the message between 1 and 536.870,911.
+//    a. Field numbers from 19,000 to 19,999 are reserved for procotol buffers implementation, so these range cannot be used.
+//    b. You cannot use any reserved field numbers or use field numbers that were deleted.
+//    c. Field numbers should not be reused.
+//    d. A common example is to have field numbers from 1 to 15 since these range takes one byte to encode (which is very small).
+message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 results_per_page = 3;
+}
+
+// Optional field labels.
+// Optional field labels has only two states.
+// 1. The field is set, and contains the value that was explicitly set.
+// 2. The field is unset, and contains the default value.
+message OptionalLabel {
+  optional string name = 1;
+  optional int32 age = 2;
+}
+
+// Repeated field label.
+// This field label represents that can be repeated zero or more times: like an array, list.
+// The name of the field that was defined as repeated must be in plural.
+message RepeatedLabel {
+  repeated string names = 1;
+}
+
+// Map field label.
+// Map field label is an special kind of repeated field but having a relation of key/value pair.
+message MapLabel {
+  map<string, Label> labels = 2;
+}
+// Message Label type
+message Label {
+  string name = 1;
+}
+
+// Comments are valid here in proto files using the C/C++ syntax // or /* */
+// This a comment
+/*
+
+  This is a very long comment
+
+*/
+

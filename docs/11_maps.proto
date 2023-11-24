@@ -1,0 +1,26 @@
+syntax="proto3";
+
+/*
+  Maps:
+  map is a type, similar as repeated but with key/value pairs.
+  map <key_map_type, value_map_type> my_map = N;
+  Where key_map_type can be any scalar type except floating types and value_map_type can be any type:
+  - key_map_type cannot use enum values
+  - value_map_type cannot be use the type of map.
+*/
+
+message Conference {
+  // We define projects as a map with a key of type string and a value of type Project
+  map <string, Project> projects = 1;
+}
+
+message Project {
+  string author = 1;
+  string timeline = 2;
+}
+
+/*
+  Map features:
+  1. Map fields cannot be repeated
+  2. Don't expect to have an ordered map when iterating over them.
+*/

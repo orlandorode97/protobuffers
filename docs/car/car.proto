@@ -1,0 +1,13 @@
+syntax="proto2";
+
+message Car {
+  string brand = 1;
+  int32 fuel_storage = 2;
+  Transmition transmition = 3;
+}
+
+enum Transmition {
+  TRANSMITION_UNSPECIFIED = 0;
+  TRANSMITION_AUTOMATIC = 1;
+  TRANSMITION_MANUAL = 3;
+}

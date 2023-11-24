@@ -1,0 +1,18 @@
+syntax="proto3";
+
+import "google/protobuf/any.proto";
+/*
+  The `Any` message type.
+  The `Any` message type lets to use messages as embedded types without any proto file definition.
+  It's contains two properties:
+    - bytes values: An arbitrary sereliazed message.
+    - string type_url: Global unique identifier in order to resolve the message's type.
+
+  To use `Any` we have to import from `google/protobuf/any.proto`.
+  NOTE: This must exist at the root of the protocol buffers or where the proto files are defined.
+*/
+
+message ErrorStatus {
+  string message = 1;
+  repeated google.protobuf.Any details = 2;
+}

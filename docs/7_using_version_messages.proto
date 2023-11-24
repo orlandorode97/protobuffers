@@ -1,0 +1,11 @@
+syntax="proto3";
+
+import "protobuffers/docs/car/car.proto"; 
+// This proto message uses proto2 which is valid to use its mesages in messages of proto3 and vice versa.
+// But you cannot use enums from proto2 in proto3
+
+message NewType {
+  protobuffers.docs.car.Car car = 1; 
+}
+
+

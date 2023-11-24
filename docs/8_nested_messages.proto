@@ -1,0 +1,51 @@
+syntax="proto3";
+
+/*
+  In protocol buffers is possible to nest other messages types (when you don't want to define a new message in the file or other places).
+  This can be done by nested the message inside of the parent message type:
+*/
+
+message SearchResult {
+  message Result {
+    string url = 1;
+    HttpMethod method = 2
+  }
+}
+
+/*
+  You can reuse the child message type in other messages by following the syntax of _Parent_._Type_
+*/
+
+message PostResult {
+  SearchResult.Result result = 1;
+}
+
+/*
+  You can nest any message as deeply as you want or when is necessary.
+*/
+
+message CellPhone { // Level 0
+  message Camera { // Level 1
+    int32 pixels = 1;
+    message Sensor { // Level 2
+      string name = 1;
+      bool night_mode = 2;
+    }
+  }
+}
+
+
+enum HttpMethod {
+  HTTP_METHOD_UNSPECIFIED = 0; 
+  HTTP_METHOD_GET = 1;
+  HTTP_METHOD_POST = 2;
+  HTTP_METHOD_PUT = 3;
+  HTTP_METHOD_DELETE = 4;
+  HTTP_METHOD_OPTIONS = 5;
+  HTTP_METHOD_PATCH = 6;
+  HTTP_METHOD_HEAD = 7;
+  HTTP_METHOD_CONNECT = 8;
+  HTTP_METHOD_TRACE = 9;
+  HTTP_METHOD_CUSTOM = 10;
+}
+

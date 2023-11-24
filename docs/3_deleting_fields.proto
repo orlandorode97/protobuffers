@@ -1,0 +1,31 @@
+syntax="proto3";
+
+// Deleting fields
+// Delete a field number must follow a process or it could be cause a lot of issues
+// during the encoding/decoding, serialization/deserialization processes.
+// You must always reserved the field number or field name that you want to delete or other
+// developers can reuse the field number and causing issues.
+// You must use the keyword reserved to add the field to the reserved list.
+message Request {
+  string request_name = 1;
+  // previously was defined as string http_method = 2;
+  reserved 2; // ✅ correct
+  // previously was defined as int32 size = 3;
+  reserved "size"; // ✅ correct
+  map<string,string> headers = 4;
+}
+
+message Request {
+  string request_name = 1;
+  // ❌ Field was delete, not correct
+  map<string,string> headers = 3;
+}
+
+// It's possible to reserved a list of field numbers or field names.
+// NOTE: You cannot mix field names and field numbers in a single reserved statement.
+message Response  {
+  reserved 9 to 14; // This means that the field 9, 10, 11, 12, 13, and 14 are reserved. ✅
+  reserved "foor", "bar"; // This means the the field "foor" and "bar" are reserved. ✅
+  reserved 17 to 18, "name", "status" // Avoid mixing field numbers and names ❌ 
+  // 
+}

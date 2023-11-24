@@ -1,0 +1,18 @@
+syntax="proto3";
+
+import "protobuffers/docs/car/car.proto";
+/*
+  For complex message types it recommendable to split the messages in multiple files.
+  Let's suppose we have a message type Car in the location `protobuffers/docs/car/car.proto`
+  and we want to use it in another proto file to embed another message type.
+  In order to achieve this we have to import the proto file in other to get acess to the Car message.
+  We import `import "protobuffers/docs/car/car.proto"` at the top of the file.
+*/
+
+message Client {
+  string name = 1;
+  int32 budget = 2;
+  protobuffers.docs.car.Car car = 3;
+}
+
+

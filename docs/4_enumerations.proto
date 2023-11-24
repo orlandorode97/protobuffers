@@ -1,0 +1,33 @@
+syntax="proto3";
+
+// Enums
+// Enums are predefined list of values, you might want to have a field with a possible value from a defined list.
+// We start defining an enumeration with the keyword enum and then the name of the message.
+// Define all possible options or constants including an unspecified value with the field number of 0. (XXXX_UNSPECIFIED=0;)
+enum HttpMethod {
+  HTTP_METHOD_UNSPECIFIED=0; // Always specify the default value or constant of an enum.
+  HTTP_METHOD_GET=1;
+  HTTP_METHOD_POST=2;
+  HTTP_METHOD_PUT=3;
+  HTTP_METHOD_DELETE=4;
+  HTTP_METHOD_OPTIONS=5;
+  HTTP_METHOD_PATCH=6;
+  HTTP_METHOD_HEAD=7;
+  HTTP_METHOD_CONNECT=8;
+  HTTP_METHOD_TRACE=9;
+  HTTP_METHOD_CUSTOM=10;
+}
+
+message Request {
+  HttpMethod method = 1;
+}
+
+// Reserved enum values
+// There are cases where an enum must be updated or a value from an enum should be deleted.
+// By doing this we have the posibiliy of future developers reusing the field numbers and causing issues in the future.
+// We can reserved the constants/values of enums to avoid reusing these identifiers
+enum Foo {
+  reserved 2, 15, 19 to 22, 40 to max; // The max keyword represents a reserved numeric value range to the maximum of possible values.
+  reserved "foo", "bar"
+}
+

@@ -1,0 +1,44 @@
+syntax="proto3";
+
+/*
+  OneOf
+  `Oneof` is a feature where a message that has multiple fields but at most one of the fields is set at the same time.
+  This means that you can pick a sigle field from the oneof fields (multiple set of fields).
+  Imagine a magic box that contains different toys:
+  - A red car
+  - A blue dinosaur
+  - A green building
+  These toys are set in a magic box but you can only use or pick one of them at a time and use it.
+*/
+
+/*
+  This following `Foo` message contains a `Bar` oneof field that holds three variables of different sizes
+  - active (one byte)
+  - count (four bytes)
+  - value (eight bytes)
+  Which is C++ code generation is
+
+  enum class id
+  {
+    NOT_SET = 0,
+    ACTIVE = 1,
+    COUNT = 2,
+    VALUE = 3
+  };
+*/
+message Foo { 
+  oneof Bar {
+    bool active = 1;
+    int32 count = 2;
+    double value = 3;
+  }
+}
+
+/*
+  Oneof features:
+  1. If you have mutiple oneof fields, all the members will be cleaned except one. Only the last field you set will still have a value.
+  2. A oneof cannot be repeated
+  3. When checking the value from oneof fields that is not set it returns None / NOT_SET
+*/
+
+
