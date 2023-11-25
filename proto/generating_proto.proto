@@ -1,0 +1,19 @@
+syntax="proto3";
+
+option go_package="github.com/orlandorode97/protobuffers/example";
+option java_package="com.github.orlandorode97.protobuffers.example";
+
+import "person/person.proto";
+
+service SearchService {
+  rpc Search(SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+  string criteria = 1;
+}
+
+message SearchResponse {
+  int32 total = 1; 
+  repeated person.Person results = 2;
+}

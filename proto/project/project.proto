@@ -1,0 +1,10 @@
+syntax="proto3";
+
+option go_package="github.com/orlandorode97/protobuffers/example/project";
+package project;
+
+message Project {
+  string name = 1;
+  int32 timeline = 2;
+  string tutor = 3;
+}

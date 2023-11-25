@@ -1,0 +1,14 @@
+syntax="proto3";
+
+option go_package="github.com/orlandorode97/protobuffers/example/address";
+package address;
+
+message Address {
+  string street_1 = 1;
+  string street_2 = 2;
+  string postal_code = 3;
+  string city = 4;
+  string state = 5;
+  string country = 6;
+}
+

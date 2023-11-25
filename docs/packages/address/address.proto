@@ -1,0 +1,15 @@
+syntax="proto3";
+
+// We define our package as address.
+package address;
+
+// message Address that holds the address.
+message Address {
+  string street_1 = 1;
+  string street_2 = 2;
+  string postal_code = 3;
+  string city = 4;
+  string state = 5;
+  string country = 6;
+}
+

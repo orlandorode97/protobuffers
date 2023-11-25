@@ -1,0 +1,38 @@
+syntax="proto3";
+
+//importing google description to use options
+import "google/protobuf/descriptor.proto";
+
+// option go_package defines the package where the generated code will be stored.
+option go_package = "protobuffers/generated/go";
+// option java_package defines the package where the generated code will be stored.
+option java_package = "com.example.foo";
+// option optimize_for may affect only java or C++: This option will generate the minimal classes but operations will be slower.
+option optimize_for = CODE_SIZE;
+// Options
+// Options are individual declarations that handles multiple contexts.
+// 1. top-level declarations (top of the file).
+// 2. message-level options.
+// 3. field-level options (including fields, enums, service types, and service methods).
+// All options are defined here https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto
+
+/*
+  Options in Enums values
+*/
+
+extend google.protobuf.EnumValueOptions {
+  // Defining custom option
+  optionl string_name = 123456789;
+}
+
+enum Data {
+  DATA_UNSPECIFIED = 0;
+  // Using the deprecated option to not use this enum value
+  DATA_SEARCH = 1 [deprecated = true];
+  DATA_DISPLAY = 2 [
+    // using the custom string_name option
+    (string_name) = "display_value"
+  ];
+}
+
+

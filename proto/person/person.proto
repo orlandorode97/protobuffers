@@ -1,0 +1,21 @@
+
+syntax="proto3";
+
+option go_package="github.com/orlandorode97/protobuffers/example/person";
+package person;
+
+import "address/address.proto";
+import "project/project.proto";
+
+message Person {
+  string name  = 1;
+  int32 age = 2;
+  string phone_number = 3;
+  address.Address address = 4;
+  map <string, project.Project> projects = 5;
+  oneof Phone {
+    string phone = 6;
+    string mobile = 7;
+    string home_phone = 8;
+  }
+}

@@ -1,0 +1,14 @@
+syntax="proto3";
+
+package person;
+
+// import address.proto
+import "protobuffers/docs/packages/address/address.proto";
+
+message Person {
+  string name  = 1;
+  int32 age = 2;
+  string phone_number = 3;
+  // Rerefencing to the address package from "protobuffers/docs/packages/address/address.proto";
+  address.Address address = 4;
+}

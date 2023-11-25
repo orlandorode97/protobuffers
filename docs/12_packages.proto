@@ -1,0 +1,19 @@
+syntax="proto3";
+
+/*
+  Packages
+  You can add an optional `package` identifier to avoid name collisions with other protocol messages types
+  with the purpose to organize and structure all your proto files.
+  We define a package with the keyword `package` and then the name of the package.
+  package example;
+  This is similar when importing protos but this will be from the package perspective and an easy way to import.
+*/
+
+// Examples in docs/packages
+
+// The generated code based on packages depends on the chosen programming language:
+// For Golang the keyword `package` is ignored and the `.pb.go` files are generated in the
+// option go_package ="name/package"
+
+// The keyword `package` is ignored by most of the programming languages but it is recomendable to specify it in .proto files
+

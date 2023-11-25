@@ -1,0 +1,35 @@
+syntax="proto3";
+
+/*
+  Services
+  We can define a message type that uses an RPC system (Remote Procedure Call), this is where a service
+  comes from.
+  A service is an interface that defines zero o more RPC calls.
+  The procotol buffer compiler generates a service interface code and stubs (generated code client to implement) in the chosen
+  programming languages.
+
+  We define a servie with the keyword service and the follow the name of the service.
+  Then define the rpc methods with the keyword rpc followed by the rpc name, and the request and return response.
+*/
+
+// Define SearchService
+service SearchService {
+  // Define Search RPC method by receiving a SearchRequest and return a SearchResponse
+  rpc Search(SearchRequest) returns (SearchResponse)
+}
+
+// SearchRequest
+message SearchRequest {
+  string query = 1;
+  int32 current_page = 2;
+}
+
+// SearchResponse
+message SearchResponse {
+  int32 total = 1;
+  message Meta {
+    string next = 1;
+  }
+}
+
+// The most compatible RPC system is gRPC which is an open-source RPC system developed by google.
