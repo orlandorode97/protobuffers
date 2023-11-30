@@ -1,7 +1,8 @@
 syntax="proto3";
 
-option go_package="github.com/orlandorode97/protobuffers/example/address";
 package address;
+
+option go_package="github.com/orlandorode97/protobuffers/generated/go/example/address";
 
 message Address {
   string street_1 = 1;

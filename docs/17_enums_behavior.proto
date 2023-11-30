@@ -1,0 +1,38 @@
+/*
+  Enums behavior
+  An enum has two behaviors: open and close.
+  Both behave the same but different when unknown values come in.
+*/
+
+enum Enum {
+  ENUM_1 = 0;
+  ENUM_2 = 1;
+}
+
+message Message {
+  optional Enum enum = 1;
+}
+
+// What happens when a program parses the binary data when the field number 1 stores a value different that 0 or 1? like the value 2 for example.
+// Open enums will parse the value of 2, and it's going to store it in the field 1. Therefore it will return something that represents the value of 2 
+// Closed enums will parse the value of 2, and it's goint to store it in an unknown field set. Therefore it will return the default enum value (ENUM_1)
+
+// Implications of closed enums
+// There are some implications when working with closed enums.
+
+enum Enum {
+  A = 0;
+  B = 1;
+}
+
+message Msg {
+  repeated Enum r = 1;
+}
+
+// The binary data of the message Msg of the r field will contain the following: [0, 2, 1, 2].
+// When the program parses the information, it stores in r field the known values of the repeated Enum [0, 1]
+// where the unknown values [2, 2] are placed in an unknown field set.
+// When reserializing the data, the format will contain [0, 1, 2, 2].
+
+// Before the release of proto3 all the enums were closed.
+// After the release of proto3 all the enums are opened to avoid unexpected issues with closed enums.

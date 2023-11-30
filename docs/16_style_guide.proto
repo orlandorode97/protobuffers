@@ -1,0 +1,133 @@
+
+/*
+  Style guide:
+  When working with proto files, there are some styles we need to follow as standard that the protocol buffers suggests
+  to define better data structures, conventions, etc.
+  Some organizations follows their styles or conventions. RESPECT the existing style if you're going to modify existing proto files.
+
+  Standard File Formatting
+  When working with proto files we have to apply some formatting:
+  1. Keep the line lenght to 80 characters, no more.
+  2. Use indent of 2 spaces.
+  3. Prefer to use double quoates for strings.
+
+ This service will include more than 80 characteres as definitions so let's take a look".length
+*/
+
+syntax="proto3";
+
+option go_package = 'example/go_package'; // using single quoates ❌
+option go_package = "example/go_package"; // using double quoates ✅
+
+
+service ThisIsTheNameOfTheServiceWithLongCharactersWhichDoesNotFollowFileFormatting { // Line with more than 80 characters ❌
+  rpc Search() returns (); // Indentation of two spaces ✅
+rpc Hey() returns; // Indentation of zero spaces ❌
+   rpc Foo() returns (); // Indentation of three spaces ❌
+}
+
+/*
+  File structure
+  Proto file definitions must follow the following structure.
+  1. All files should be named lower_snake_case.proto;
+  2. All files must have the following content in ordered.
+    a. License header (optional)
+    b. File Overview
+    c. Syntax
+    d. Package
+    e. Imports (sorted)
+    f. File Options
+    g. Everything else
+*/
+
+/*
+  Packages
+  Packages should be named in lowercase with unique names based on the project name.
+  ├── google
+      └── protobuf
+           └── any.proto
+
+  The any.proto has the package idenfifier as package google.protobuf; ✅
+*/
+
+
+/*
+  Message and field names.
+  When defining messages and field names we follow the next conventions.
+  Messages:
+  Messages must use PascalCase for messages name like SearchRequest
+*/
+
+message SearchRequest {} // Following PascalCase ✅
+message searchRequest {} // Wrong style ❌
+message Searchrequest {} // Wrong style ❌
+
+/*
+  Fields:
+  Fields must use lower_snake_case for field names like full_name.
+  Using the convention we intentionally follow name conventions for some programming
+  languages as C++
+*/
+
+message SearchRequest {
+  string full_name = 1; // following lower_snake_case ✅
+  string FullName = 2; // Wrong style ❌
+  string fullName = 3; // Wrong style ❌
+  string fullname = 4; // Wrong style ❌
+}
+
+// When a field contains a number, it should be placed at the end separated by the underscore
+
+message WithNumber {
+  string street_1 = 1; // ✅
+  string street2 = 2;  // ❌
+}
+
+/*
+  Repeated fields
+  This is the simplest one. The repeated fields should be named as plural.
+*/
+
+message RepeatedFields {
+  repeated string user = 1; // user stores multiple strings? ❌
+  repeated User users // users stores multiple message of the type User, makes more sense ✅
+}
+
+message User {
+  string name = 1;
+}
+
+/*
+  Enums
+  Enum definitions should be named using PascalCase.
+  The values of the enum should be in CAPITAL letters separated by underscores.
+*/
+
+enum ThisIsMyEnum {
+  THIS_IS_MY_ENUM_UNSPECIFIED = 0; // ✅
+  this_is_my_enum_first_value = 1; // ❌
+  This_Is_My_Enum_Second_Value = 2; // ❌
+  ThisIsMyEnumThirdValue = 3; // ❌
+}
+
+// An enum must always start with the a zero-value since server applications might get unexpected enum value
+
+enum EnumWithoutZeroValue {
+  // does not have a zero enum value which ends with _UNSPECIFIED. ❌
+  ENUM_WITHOUT_ZERO_VALUE_FIRST = 1;
+  ENUM_WITHOUT_ZERO_VALUE_SECOND = 2;
+}
+
+/*
+  Services
+  Services should be name using PascalCase including their RPC methods
+*/
+
+service protoService { // bad name ❌
+  rpc GetProto(GetProtoRequest) returns (GetProtoResponse); // correct rpc method name format ✅
+  rpc createProto(CreateProtoRequest) returns (CreateProtoResponse); // wrong rpc name format ❌
+}
+
+service ProtoService { // cool name format ✅
+  rpc GetProto(GetProtoRequest) returns (GetProtoResponse); // correct rpc method name format ✅
+}

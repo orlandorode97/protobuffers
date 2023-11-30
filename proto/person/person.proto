@@ -1,11 +1,12 @@
 
 syntax="proto3";
-
-option go_package="github.com/orlandorode97/protobuffers/example/person";
 package person;
 
 import "address/address.proto";
 import "project/project.proto";
+
+option go_package="github.com/orlandorode97/protobuffers/generated/go/example/person";
+
 
 message Person {
   string name  = 1;

@@ -1,9 +1,11 @@
 syntax="proto3";
-
-option go_package="github.com/orlandorode97/protobuffers/example";
-option java_package="com.github.orlandorode97.protobuffers.example";
+package example;
 
 import "person/person.proto";
+
+option go_package="github.com/orlandorode97/protobuffers/generated/go/example";
+option java_package="com.github.orlandorode97.protobuffers.example";
+
 
 service SearchService {
   rpc Search(SearchRequest) returns (SearchResponse);
