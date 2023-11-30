@@ -15,7 +15,7 @@ syntax="proto3";
 // Define SearchService
 service SearchService {
   // Define Search RPC method by receiving a SearchRequest and return a SearchResponse
-  rpc Search(SearchRequest) returns (SearchResponse)
+  rpc Search(SearchRequest) returns (SearchResponse);
 }
 
 // SearchRequest
